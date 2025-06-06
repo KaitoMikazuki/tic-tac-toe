@@ -20,6 +20,7 @@ const GameBoard = (function createBoard(){
 
     function playerMove(cellCode, player){
         board[cellCode] = player.symbol;
+        console.log(board)
         return checkWins();
     }
 
@@ -99,7 +100,7 @@ const Game = (function createGameboard(){
                 winner = state.gameBoard.playerMove(move, state.player2)
                 console.log("player two moved")
             }
-            playerOneTurn === !playerOneTurn;
+            playerOneTurn = !playerOneTurn;
             remainingTurns--;
         }
     }
