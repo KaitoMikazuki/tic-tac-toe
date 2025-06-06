@@ -79,22 +79,28 @@ const Game = (function createGameboard(){
         state.player1 = createPlayer("UserInput1", "X");
         state.player2 = createPlayer("UserInput2", "O");
 
+        // Initialize
         let winner = false;
         let playerOneTurn = true;
         let remainingTurns = 9;
 
-        // 
         while(remainingTurns > 0 && winner === false){
+            // while invalid move, keep asking user
             let move = Number(prompt("What move bru"));
-            state.gameBoard.validatePlayerMove(move); // will return a false if invalid
+            while (state.gameBoard.validatePlayerMove(move) === false){
+                move = Number(prompt("What move bru"));
+            }
 
             if (playerOneTurn){
                 winner = state.gameBoard.playerMove(move, state.player1)
+                console.log("player one moved")
             }
             else{
                 winner = state.gameBoard.playerMove(move, state.player2)
+                console.log("player two moved")
             }
             playerOneTurn === !playerOneTurn;
+            remainingTurns--;
         }
     }
 
