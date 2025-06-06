@@ -5,31 +5,35 @@ function createPlayer(name, symbol){
 
 
 const GameBoard = (function createBoard(){
-    const board = new Array(9).fill(undefined)
+    const board = new Array(9).fill(undefined);
 
-    function playerMove(cellCode, player){
-        if (board[cellcode] !== undefined){
-            return
+    // if true, valid move
+    function validatePlayerMove(cellCode){
+        if (board[cellCode] !== undefined){
+            return false
         }
-        else if (cellCode >= 0 && cellCode < 9){
-            board[cellCode] = player.symbol;
+        else if (cellCode < 0 && cellCode >= 9){
+            return false
         }
-        else{
-            throw Error("invalid playerMove code");
-        }
-        checkWins(player);
+        return true
     }
 
-    
+    function playerMove(cellCode, player){
+        board[cellCode] = player.symbol;
+        return checkWins();
+    }
+
+
+    // Whenever called, checks 3 conditions for both symbols
     function checkWins(){
-        // condition 1: Checks horizontally (0-2, 3-5, 6-8)
+        // condition 1: Check horizontally, (0-2, 3-5, 6-8)
         for (let cell = 0; cell < 9; cell++){
             if (board[cell] === undefined){
                 continue;
             }
             
             else if (board[cell] === board[cell + 1] && board[cell] === board[cell + 2]){
-                console.log("winHorizontal");
+                return true
             }
         }
         
@@ -40,24 +44,26 @@ const GameBoard = (function createBoard(){
             }
             
             else if(board[row] === board[row + 3] && board[row] === board[row + 6]){
-                
+                return true
             }
         }
         
-        // condition 3: if (0,4,8) or (2,4,6)
+        // condition 3: Checks diagonally, (0,4,8) or (2,4,6)
         if (board [0] !== undefined && board[0] === board[4] && board[4] === board[8]){
-            console.log("winDiagonalLeft");
+            return true
         }
         else if (board [2] !== undefined && board[2] === board[4] && board[4] === board[6]){
-            console.log("winDiagonalRight");
+            return true
         }
+        return false
     }
     
+
     function reset(){
         board.fill(undefined);
     }
 
-    return {playerMove, reset, board}
+    return {playerMove, reset, validatePlayerMove}
 })();
 
 
@@ -73,11 +79,22 @@ const Game = (function createGameboard(){
         state.player1 = createPlayer("UserInput1", "X");
         state.player2 = createPlayer("UserInput2", "O");
 
-        let [ongoingGame, playerOneTurn] = [true, true]
-        while (ongoingGame){
-            if (playerOneTurn){
+        let winner = false;
+        let playerOneTurn = true;
+        let remainingTurns = 9;
 
+        // 
+        while(remainingTurns > 0 && winner === false){
+            let move = Number(prompt("What move bru"));
+            state.gameBoard.validatePlayerMove(move); // will return a false if invalid
+
+            if (playerOneTurn){
+                winner = state.gameBoard.playerMove(move, state.player1)
             }
+            else{
+                winner = state.gameBoard.playerMove(move, state.player2)
+            }
+            playerOneTurn === !playerOneTurn;
         }
     }
 
