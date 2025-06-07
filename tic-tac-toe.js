@@ -2,7 +2,10 @@
 function createPlayer(name, symbol){
     return {name, symbol}
 }
+const DisplayController = (function(){
 
+
+    })();
 
 const GameBoard = (function createBoard(){
     const board = new Array(9).fill(undefined);
@@ -73,7 +76,7 @@ const GameBoard = (function createBoard(){
 
 const board = GameBoard.board
 
-const Game = (function createGameboard(){
+const GameController = (function createGameboard(){
     const state = {
         gameBoard: GameBoard,
         player1: null,
@@ -86,15 +89,9 @@ const Game = (function createGameboard(){
 
         let winner = false;
         let playerOneTurn = true;
-        let remainingTurns = 9;
+        let remainingTurns = 0;
 
         while(remainingTurns > 0 && winner === false){
-            // while invalid move, keep asking user
-            let move = Number(prompt("What move bru"));
-            while (state.gameBoard.validatePlayerMove(move) === false){
-                move = Number(prompt("What move bru"));
-            }
-
             if (playerOneTurn){
                 winner = state.gameBoard.playerMove(move, state.player1)
                 console.log("player one moved")
@@ -120,4 +117,4 @@ const Game = (function createGameboard(){
     return {startGame}
 })();
 
-Game.startGame(GameBoard.board);
+GameController.startGame(GameBoard.board);
