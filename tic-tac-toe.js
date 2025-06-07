@@ -12,7 +12,7 @@ const GameBoard = (function createBoard(){
         if (board[cellCode] !== undefined){
             return false
         }
-        else if (cellCode < 0 && cellCode >= 9){
+        else if (Number(cellCode) < 0 || Number(cellCode) >= 9){
             return false
         }
         return true
@@ -28,12 +28,13 @@ const GameBoard = (function createBoard(){
     // Whenever called, checks 3 conditions for both symbols
     function checkWins(){
         // condition 1: Check horizontally, (0-2, 3-5, 6-8)
-        for (let cell = 0; cell < 9; cell++){
+        for (let cell = 0; cell < 9; cell += 3){
             if (board[cell] === undefined){
                 continue;
             }
             
             else if (board[cell] === board[cell + 1] && board[cell] === board[cell + 2]){
+                console.log("condition1 win");
                 return true
             }
         }
@@ -45,15 +46,18 @@ const GameBoard = (function createBoard(){
             }
             
             else if(board[row] === board[row + 3] && board[row] === board[row + 6]){
+                console.log("condition2 win");
                 return true
             }
         }
         
         // condition 3: Checks diagonally, (0,4,8) or (2,4,6)
         if (board [0] !== undefined && board[0] === board[4] && board[4] === board[8]){
+            console.log("condition3 win");
             return true
         }
         else if (board [2] !== undefined && board[2] === board[4] && board[4] === board[6]){
+            console.log("condition3 win");
             return true
         }
         return false
@@ -64,10 +68,10 @@ const GameBoard = (function createBoard(){
         board.fill(undefined);
     }
 
-    return {playerMove, reset, validatePlayerMove}
+    return {playerMove, reset, validatePlayerMove, board}
 })();
 
-
+const board = GameBoard.board
 
 const Game = (function createGameboard(){
     const state = {
@@ -80,7 +84,6 @@ const Game = (function createGameboard(){
         state.player1 = createPlayer("UserInput1", "X");
         state.player2 = createPlayer("UserInput2", "O");
 
-        // Initialize
         let winner = false;
         let playerOneTurn = true;
         let remainingTurns = 9;
