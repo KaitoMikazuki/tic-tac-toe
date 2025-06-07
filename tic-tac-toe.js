@@ -106,6 +106,15 @@ const Game = (function createGameboard(){
             playerOneTurn = !playerOneTurn;
             remainingTurns--;
         }
+        if (winner === false){
+            console.log("it's a tie!")
+        }
+        else if (playerOneTurn){
+            console.log(`${state.player2.name} wins!`)
+        }
+        else if(!playerOneTurn){
+            console.log(`${state.player1.name} wins!`)
+        }
     }
 
     return {startGame}
