@@ -1,0 +1,30 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.game-container{
+    background: black; /* GRID GAP COLOR*/
+    aspect-ratio: 1/1;
+    width: 50vw;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap:8px;
+    margin: 32px;
+}
+
+.box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    font-size: 64px;
+}
