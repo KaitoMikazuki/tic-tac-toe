@@ -3,8 +3,13 @@ function createPlayer(name, symbol){
     return {name, symbol}
 }
 const DisplayController = (function(){
+        document.querySelector('game-container').addEventListener('click', (event) => {
+            if (event.target.classList.contains('box')){
+                
+            }
+        }) 
 
-
+        
     })();
 
 const GameBoard = (function createBoard(){
