@@ -2,13 +2,19 @@
 function createPlayer(name, symbol){
     return {name, symbol}
 }
-// const DisplayController = (function(){
-//         document.querySelector('game-container').addEventListener('click', handleClick()) 
+const DisplayController = (function(){
+        function attachEventListener(){
+            document.querySelector('game-container').addEventListener('click', handleClick()) 
+        }
+        
+        function handleClick(event){
+            if (event.target.classList.contains('box')){
+                let moveCode = event.target.value;
+                playerMove(moveCode);
+            }}
 
-//         function handleClick(event){
-//             if (event.target.classList.contains('box')){
-//                 let moveCode = event.target.value;
-                
+        return {attachEventListener}
+        })();
 
 //         }
                 // acquire the id/value so we know what cell to chage
@@ -18,8 +24,6 @@ function createPlayer(name, symbol){
     //     function changeCellContent(cell){
     //         cell.children[0].textContent = ;
     //     }
-    // })();
-
 const GameBoard = (function createBoard(){
     const board = new Array(9).fill(undefined);
 
@@ -93,7 +97,35 @@ const GameController = (function createGameboard(){
         remainingTurns: 9,
         playerOneTurn: true
     };
-
+    
+    
+    
+    
+    function playerMove(move){
+        if (!state.gameBoard.validatePlayerMove(move)){
+            return
+        }
+        
+        // Checks for winners and remaining turns, then checks whose turn it is. 
+        if (state.remainingTurns > 0 && state.winner === false){
+            state.playerOneTurn
+            ? state.gameBoard.changeBoardCell(move, state.player1)
+            : state.gameBoard.changeBoardCell(move, state.player2);
+            
+            remainingTurns--;
+            state.playerOneTurn = !state.playerOneTurn;
+        }
+        
+        state.winner = state.gameBoard.checkWins()
+        if (state.winner === true){
+            declareWinner();
+        }
+        else if (state.remainingTurns === 0){
+            console.log("It's a tie")
+        }
+    }
+    
+    
     function declareWinner(){
         // Last move was player 2
         if (state.playerOneTurn){
@@ -106,34 +138,12 @@ const GameController = (function createGameboard(){
         }  
     }
 
-    // This function is called by the displayHandler 
-    function playerMove(move){
-        if (!state.gameBoard.validatePlayerMove(move)){
-            return
-        }
-
-        // Checks for winners and remaining turns, then checks whose turn it is. 
-        if (state.remainingTurns > 0 && state.winner === false){
-            state.playerOneTurn
-                ? state.gameBoard.changeBoardCell(move, state.player1)
-                : state.gameBoard.changeBoardCell(move, state.player2);
-
-                remainingTurns--;
-                state.playerOneTurn = !state.playerOneTurn;
-        }
-
-        if (state.gameBoard.checkWins() === true){
-            declareWinner();
-        }
-        else if (state.remainingTurns === 0){
-            console.log("It's a tie")
-        }
-    }
 
     function startGame(board){
         state.player1 = createPlayer("UserInput1", "X");
         state.player2 = createPlayer("UserInput2", "O");
-
+        DisplayController.attachEventListener();
+        
     }
 
     return {startGame, playerMove, state}
