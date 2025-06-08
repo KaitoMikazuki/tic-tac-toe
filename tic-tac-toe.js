@@ -33,11 +33,8 @@ const GameBoard = (function createBoard(){
     function changeBoardCell(cellCode, player){
         board[cellCode] = player.symbol;
         console.log(board)
-        return checkWins();
     }
 
-
-    // Whenever called, checks 3 conditions for both symbols
     function checkWins(){
         // condition 1: Check horizontally, (0-2, 3-5, 6-8)
         for (let cell = 0; cell < 9; cell += 3){
@@ -80,7 +77,7 @@ const GameBoard = (function createBoard(){
         board.fill(undefined);
     }
 
-    return {changeBoardCell, reset, validatePlayerMove, board}
+    return {changeBoardCell, reset, validatePlayerMove, checkWins, board}
 })();
 
 const board = GameBoard.board
@@ -96,39 +93,43 @@ const GameController = (function createGameboard(){
     };
 
     function declareWinner(){
-        if (state.winner === false){
-            console.log("it's a tie!")
-        }
-        else if (state.playerOneTurn){
+        // Last move was player 2
+        if (state.playerOneTurn){
             console.log(`${state.player2.name} wins!`)
         }
+
+        // Last move was player 1
         else if(!state.playerOneTurn){
             console.log(`${state.player1.name} wins!`)
         }  
     }
 
+    function playerMove(){
+        // Checks for winners and remaining turns, then checks whose turn it is. 
+        if (state.remainingTurns > 0 && state.winner === false){
+            state.playerOneTurn
+                ? state.gameBoard.changeBoardCell(move, state.player1) 
+                : state.gameBoard.changeBoardCell(move, state.player2);
+
+                remainingTurns--;
+                state.playerOneTurn = !state.playerOneTurn
+        }
+
+        if (state.gameBoard.checkWins() === true){
+            declareWinner();
+        }
+        else if (state.remainingTurns === 0){
+            console.log("It's a tie")
+        }
+    }
+
     function startGame(board){
         state.player1 = createPlayer("UserInput1", "X");
         state.player2 = createPlayer("UserInput2", "O");
-
-        while(state.remainingTurns > 0 && state.winner === false){
-            // let move = await (DOM INSERT) MAYBE SHOULD BE FROM THE changeBoardCell
-            if (state.playerOneTurn){
-                winner = state.gameBoard.changeBoardCell(move, state.player1)
-                console.log("player one moved")
-            }
-            else{
-                winner = state.gameBoard.changeBoardCell(move, state.player2)
-                console.log("player two moved")
-            }
-            playerOneTurn = !playerOneTurn;
-            remainingTurns--;
-        }
-        declareWinner();
-
+        
     }
 
-    return {startGame}
+    return {startGame, playerMove}
 })();
 
 GameController.startGame(GameBoard.board);
