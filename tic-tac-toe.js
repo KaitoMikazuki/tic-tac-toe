@@ -2,20 +2,18 @@
 function createPlayer(name, symbol){
     return {name, symbol}
 }
-const DisplayController = (function(){
-        document.querySelector('game-container').addEventListener('click', handleClick()) 
+// const DisplayController = (function(){
+//         document.querySelector('game-container').addEventListener('click', handleClick()) 
 
-        function handleClick(event){
-            if (event.target.classList.contains('box')){
-                let moveCode = event.target.value;
+//         function handleClick(event){
+//             if (event.target.classList.contains('box')){
+//                 let moveCode = event.target.value;
                 
 
-        }
+//         }
                 // acquire the id/value so we know what cell to chage
                 // changeCellContent(event.target);
                 // how to know what symbol
-            })
-        }) 
 
     //     function changeCellContent(cell){
     //         cell.children[0].textContent = ;
@@ -25,7 +23,6 @@ const DisplayController = (function(){
 const GameBoard = (function createBoard(){
     const board = new Array(9).fill(undefined);
 
-    // if true, valid move
     function validatePlayerMove(moveCode){
         if (board[moveCode] !== undefined){
             return false
@@ -38,7 +35,7 @@ const GameBoard = (function createBoard(){
 
     function changeBoardCell(cellCode, player){
         board[cellCode] = player.symbol;
-        console.log(board)
+        console.log(board) //debug statement
     }
 
     function checkWins(){
@@ -83,10 +80,9 @@ const GameBoard = (function createBoard(){
         board.fill(undefined);
     }
 
-    return {changeBoardCell, reset, validatePlayerMove, checkWins, board}
+    return {changeBoardCell, reset, validatePlayerMove, checkWins}
 })();
 
-const board = GameBoard.board
 
 const GameController = (function createGameboard(){
     const state = {
@@ -119,7 +115,7 @@ const GameController = (function createGameboard(){
         // Checks for winners and remaining turns, then checks whose turn it is. 
         if (state.remainingTurns > 0 && state.winner === false){
             state.playerOneTurn
-                ? state.gameBoard.changeBoardCell(move, state.player1);
+                ? state.gameBoard.changeBoardCell(move, state.player1)
                 : state.gameBoard.changeBoardCell(move, state.player2);
 
                 remainingTurns--;
