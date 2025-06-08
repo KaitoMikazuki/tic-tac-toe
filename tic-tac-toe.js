@@ -4,26 +4,18 @@ function createPlayer(name, symbol){
 }
 const DisplayController = (function(){
         function attachEventListener(){
-            document.querySelector('game-container').addEventListener('click', handleClick()) 
+            document.querySelector('.game-container').addEventListener('click', handleClick) 
         }
         
         function handleClick(event){
             if (event.target.classList.contains('box')){
-                let moveCode = event.target.value;
-                playerMove(moveCode);
+                let moveCode = event.target.id;
+                GameController.playerMove(moveCode);
             }}
+            // problem is boxInput is not accepted 
 
         return {attachEventListener}
-        })();
-
-//         }
-                // acquire the id/value so we know what cell to chage
-                // changeCellContent(event.target);
-                // how to know what symbol
-
-    //     function changeCellContent(cell){
-    //         cell.children[0].textContent = ;
-    //     }
+    })();
 const GameBoard = (function createBoard(){
     const board = new Array(9).fill(undefined);
 
@@ -112,7 +104,7 @@ const GameController = (function createGameboard(){
             ? state.gameBoard.changeBoardCell(move, state.player1)
             : state.gameBoard.changeBoardCell(move, state.player2);
             
-            remainingTurns--;
+            state.remainingTurns--;
             state.playerOneTurn = !state.playerOneTurn;
         }
         
