@@ -3,8 +3,14 @@ function createPlayer(name, symbol){
     return {name, symbol}
 }
 const DisplayController = (function(){
-        document.querySelector('game-container').addEventListener('click', (event) => {
+        document.querySelector('game-container').addEventListener('click', handleClick()) 
+
+        function handleClick(event){
             if (event.target.classList.contains('box')){
+                let moveCode = event.target.value;
+                
+
+        }
                 // acquire the id/value so we know what cell to chage
                 // changeCellContent(event.target);
                 // how to know what symbol
@@ -20,11 +26,11 @@ const GameBoard = (function createBoard(){
     const board = new Array(9).fill(undefined);
 
     // if true, valid move
-    function validatePlayerMove(cellCode){
-        if (board[cellCode] !== undefined){
+    function validatePlayerMove(moveCode){
+        if (board[moveCode] !== undefined){
             return false
         }
-        else if (Number(cellCode) < 0 || Number(cellCode) >= 9){
+        else if (Number(moveCode) < 0 || Number(moveCode) >= 9){
             return false
         }
         return true
@@ -104,15 +110,20 @@ const GameController = (function createGameboard(){
         }  
     }
 
-    function playerMove(){
+    // This function is called by the displayHandler 
+    function playerMove(move){
+        if (!state.gameBoard.validatePlayerMove(move)){
+            return
+        }
+
         // Checks for winners and remaining turns, then checks whose turn it is. 
         if (state.remainingTurns > 0 && state.winner === false){
             state.playerOneTurn
-                ? state.gameBoard.changeBoardCell(move, state.player1) 
+                ? state.gameBoard.changeBoardCell(move, state.player1);
                 : state.gameBoard.changeBoardCell(move, state.player2);
 
                 remainingTurns--;
-                state.playerOneTurn = !state.playerOneTurn
+                state.playerOneTurn = !state.playerOneTurn;
         }
 
         if (state.gameBoard.checkWins() === true){
@@ -126,10 +137,10 @@ const GameController = (function createGameboard(){
     function startGame(board){
         state.player1 = createPlayer("UserInput1", "X");
         state.player2 = createPlayer("UserInput2", "O");
-        
+
     }
 
-    return {startGame, playerMove}
+    return {startGame, playerMove, state}
 })();
 
 GameController.startGame(GameBoard.board);
