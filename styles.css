@@ -21,10 +21,11 @@ body{
     margin: 32px;
 }
 
-.box {
+.cell {
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: white;
     font-size: 64px;
+    cursor: pointer;
 }
