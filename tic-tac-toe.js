@@ -17,14 +17,14 @@ const DisplayController = (function(){
             const moveCode = target.id;
             let moveSuccess = GameController.playerMove(moveCode);
             if (moveSuccess){
-                updateBoardDisplay(target);
+                updateBoardDisplay(target, GameController.state.currentPlayer.symbol);
             }
 
         }
 
 
-        function updateBoardDisplay(target){
-            target.textContent = GameController.state.currentPlayer.symbol
+        function updateBoardDisplay(target, symbol){
+            target.textContent = symbol;
         }
 
             
