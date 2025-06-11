@@ -8,12 +8,20 @@ const DisplayController = (function(){
         }
         
         function handleClick(event){
-            if (event.target.classList.contains('box')){
-                let moveCode = event.target.id;
-                GameController.playerMove(moveCode);
-            }}
-            // problem is boxInput is not accepted 
+            let target = event.target;
+            console.log(target)
+            if (!target.classList.contains('cell')){
+                return
+            }
+            
+            const moveCode = target.id;
+            let moveSuccess = GameController.playerMove(moveCode);
+            if (moveSuccess){
+                changeBoardDisplay(target);
+            }
 
+        }
+            
         return {attachEventListener}
     })();
 const GameBoard = (function createBoard(){
@@ -91,14 +99,12 @@ const GameController = (function createGameboard(){
     };
     
     
-    
-    
     function playerMove(move){
         if (!state.gameBoard.validatePlayerMove(move)){
-            return
+            return false
         }
         
-        // Checks for winners and remaining turns, then checks whose turn it is. 
+        // Checks for winners and remaining turns, then checks whose move it is. 
         if (state.remainingTurns > 0 && state.winner === false){
             state.playerOneTurn
             ? state.gameBoard.changeBoardCell(move, state.player1)
@@ -108,6 +114,7 @@ const GameController = (function createGameboard(){
             state.playerOneTurn = !state.playerOneTurn;
         }
         
+        // Chwcks for winners
         state.winner = state.gameBoard.checkWins()
         if (state.winner === true){
             declareWinner();
@@ -115,6 +122,7 @@ const GameController = (function createGameboard(){
         else if (state.remainingTurns === 0){
             console.log("It's a tie")
         }
+        return true
     }
     
     
