@@ -23,9 +23,9 @@ const DisplayController = (function(){
         }
 
 
-        // function changeBoardDisplay(target){
-        //     target.textContent = `${GameController.state}`
-        // }
+        function changeBoardDisplay(target){
+            target.textContent = `${GameController.state.currentPlayer.symbol}`
+        }
             
         return {attachEventListener}
     })();
@@ -142,8 +142,8 @@ const GameController = (function createGameboard(){
 
 
     function startGame(board){
-        state.player1 = createPlayer("UserInput1", "X");
-        state.player2 = createPlayer("UserInput2", "O");
+        state.player1 = createPlayer("Player1", "X");
+        state.player2 = createPlayer("Player2", "O");
         state.currentPlayer = state.player1;
         DisplayController.attachEventListener();
     }
