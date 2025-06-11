@@ -24,7 +24,7 @@ const DisplayController = (function(){
 
 
         function updateBoardDisplay(target){
-            target.textContent = `${GameController.state.currentPlayer.symbol}`
+            target.textContent = GameController.state.currentPlayer.symbol
         }
 
             
