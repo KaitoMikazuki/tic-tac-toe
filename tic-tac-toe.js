@@ -17,15 +17,16 @@ const DisplayController = (function(){
             const moveCode = target.id;
             let moveSuccess = GameController.playerMove(moveCode);
             if (moveSuccess){
-                changeBoardDisplay(target);
+                updateBoardDisplay(target);
             }
 
         }
 
 
-        function changeBoardDisplay(target){
+        function updateBoardDisplay(target){
             target.textContent = `${GameController.state.currentPlayer.symbol}`
         }
+
             
         return {attachEventListener}
     })();
@@ -45,7 +46,7 @@ const GameBoard = (function createBoard(){
         return true
     }
 
-    function changeBoardCell(cellCode, player){
+    function updateBoardCell(cellCode, player){
         board[cellCode] = player.symbol;
         console.log(board) //debug statement
     }
@@ -92,7 +93,7 @@ const GameBoard = (function createBoard(){
         board.fill(undefined);
     }
 
-    return {changeBoardCell, reset, validatePlayerMove, checkWins}
+    return {updateBoardCell, reset, validatePlayerMove, checkWins}
 })();
 
 
@@ -123,7 +124,7 @@ const GameController = (function createGameboard(){
         
         // Checks for winners and remaining turns, then checks whose move it is. 
         if (state.remainingTurns > 0 && state.winner === false){
-            state.gameBoard.changeBoardCell(move, state.currentPlayer);
+            state.gameBoard.updateBoardCell(move, state.currentPlayer);
             
             state.remainingTurns--;
         }
