@@ -21,9 +21,17 @@ const DisplayController = (function(){
             }
 
         }
+
+
+        // function changeBoardDisplay(target){
+        //     target.textContent = `${GameController.state}`
+        // }
             
         return {attachEventListener}
     })();
+
+
+
 const GameBoard = (function createBoard(){
     const board = new Array(9).fill(undefined);
 
@@ -95,9 +103,18 @@ const GameController = (function createGameboard(){
         player2: null,
         winner: false,
         remainingTurns: 9,
-        playerOneTurn: true
-    };
-    
+        currentPlayer: null
+    }
+
+    function turnSwitcher(){
+        if (state.currentPlayer === state.player1){
+            state.currentPlayer = state.player2;
+        }
+        else if (state.currentPlayer === state.player2)
+        {
+            state.currentPlayer = state.player1;
+        }
+    }
     
     function playerMove(move){
         if (!state.gameBoard.validatePlayerMove(move)){
@@ -106,12 +123,9 @@ const GameController = (function createGameboard(){
         
         // Checks for winners and remaining turns, then checks whose move it is. 
         if (state.remainingTurns > 0 && state.winner === false){
-            state.playerOneTurn
-            ? state.gameBoard.changeBoardCell(move, state.player1)
-            : state.gameBoard.changeBoardCell(move, state.player2);
+            state.gameBoard.changeBoardCell(move, state.currentPlayer);
             
             state.remainingTurns--;
-            state.playerOneTurn = !state.playerOneTurn;
         }
         
         // Chwcks for winners
@@ -122,28 +136,21 @@ const GameController = (function createGameboard(){
         else if (state.remainingTurns === 0){
             console.log("It's a tie")
         }
+        turnSwitcher();
         return true
     }
     
     
     function declareWinner(){
-        // Last move was player 2
-        if (state.playerOneTurn){
-            console.log(`${state.player2.name} wins!`)
-        }
-
-        // Last move was player 1
-        else if(!state.playerOneTurn){
-            console.log(`${state.player1.name} wins!`)
-        }  
+        console.log(`${state.currentPlayer} wins!`);
     }
 
 
     function startGame(board){
         state.player1 = createPlayer("UserInput1", "X");
         state.player2 = createPlayer("UserInput2", "O");
+        state.currentPlayer = state.player1;
         DisplayController.attachEventListener();
-        
     }
 
     return {startGame, playerMove, state}
