@@ -22,7 +22,8 @@ html{
 }
 
 .hide{
-    display: none;
+    display: none !important; 
+     /* Important is needed to override specifity   */
 }
 
 /* Header section */
