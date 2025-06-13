@@ -12,7 +12,7 @@ const DisplayController = (function(){
         const playerTwoName = data.get("player2");
 
         playerNameForm.classList.add("hide");
-        GameController.startGame(GameBoard.board, playerOneName, playerTwoName);
+        GameController.startGame(playerOneName, playerTwoName);
     });
     
     function startGameDisplay(){
@@ -155,7 +155,7 @@ const GameController = (function createGameboard(){
     }
 
 
-    function startGame(board, player1, player2){
+    function startGame(player1, player2){
         state.player1 = createPlayer(player1, "X");
         state.player2 = createPlayer(player2, "O");
         state.currentPlayer = state.player1;
