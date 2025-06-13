@@ -6,14 +6,15 @@ const DisplayController = (function(){
     const playerNameForm = document.querySelector('.players');
     playerNameForm.addEventListener('submit', (event) => {
         event.preventDefault();
-        // TODO: Get the form data
+        // NOTE: User input is not validated and can be unsafe at this point
         const data = new FormData(playerNameForm);
         const playerOneName = data.get("player1");
         const playerTwoName = data.get("player2");
 
         playerNameForm.classList.add("hide");
-        GameController.startGame(GameBoard.board);
+        GameController.startGame(GameBoard.board, playerOneName, playerTwoName);
     });
+    
     function startGameDisplay(){
             document.querySelector('.border').classList.remove("hide");
             document.querySelector('.game-container').addEventListener('click', handleClick) 
@@ -154,9 +155,9 @@ const GameController = (function createGameboard(){
     }
 
 
-    function startGame(board){
-        state.player1 = createPlayer("Player1", "X");
-        state.player2 = createPlayer("Player2", "O");
+    function startGame(board, player1, player2){
+        state.player1 = createPlayer(player1, "X");
+        state.player2 = createPlayer(player2, "O");
         state.currentPlayer = state.player1;
         DisplayController.startGameDisplay();
     }
