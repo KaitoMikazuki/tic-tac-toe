@@ -7,6 +7,10 @@ const DisplayController = (function(){
     playerNameForm.addEventListener('submit', (event) => {
         event.preventDefault();
         // TODO: Get the form data
+        const data = new FormData(playerNameForm);
+        const playerOneName = data.get("player1");
+        const playerTwoName = data.get("player2");
+
         playerNameForm.classList.add("hide");
         GameController.startGame(GameBoard.board);
     });
