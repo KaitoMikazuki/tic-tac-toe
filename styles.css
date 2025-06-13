@@ -10,15 +10,25 @@ body{
     font-family: Arial, Helvetica, sans-serif;
 }
 
+.hide{
+    display: none;
+}
+
+.border{
+    margin: 32px;
+    border: 2px solid black;
+    padding: 16px;
+}
+
 .game-container{
     background: black; /* GRID GAP COLOR*/
     aspect-ratio: 1/1;
-    width: 50vw;
+    width: 40vw;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
     gap:8px;
-    margin: 32px;
+    border: solid 4px black;
 }
 
 .cell {
@@ -26,6 +36,6 @@ body{
     align-items: center;
     justify-content: center;
     background-color: white;
-    font-size: 64px;
+    font-size: 10vw;
     cursor: pointer;
 }
