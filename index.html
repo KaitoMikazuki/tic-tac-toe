@@ -17,9 +17,19 @@
         </ul>
     </nav>
     <div class="players">
-
+        <form action="POST">
+            <div class="player">
+                <label for="player1">Player 1's name (X)</label>
+                <input type="text" id="player1">
+            </div>
+            <div class="player">
+                <label for="player2">Player 2's name (O)</label>
+                <input type="text" id="player2">
+            </div>
+        </form>
     </div>
-    <main class="border">
+    
+    <main class="border hide">
         <div class="game-container">
             <div class="cell" id="0" value="1"></div>
             <div class="cell" id="1" value="2"></div>
