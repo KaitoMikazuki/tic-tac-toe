@@ -132,7 +132,7 @@ const GameController = (function createGameboard(){
         // Chwcks for winners
         state.winner = state.gameBoard.checkWins()
         if (state.winner === true){
-            console.log(`${state.currentPlayer} wins!`);
+            console.log(`${state.currentPlayer.name} wins!`);
         }
         else if (state.remainingTurns === 0){
             console.log("It's a tie")
