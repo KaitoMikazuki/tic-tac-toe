@@ -5,8 +5,8 @@ function createPlayer(name, symbol){
 const DisplayController = (function(){
     document.querySelector('.start-btn').addEventListener('click', () => GameController.startGame(GameBoard.board));
         function startGameDisplay(){
-            // Hide form
-            // display board
+            document.querySelector('.players').classList.add("hide");
+            document.querySelector('.border').classList.remove("hide");
             document.querySelector('.game-container').addEventListener('click', handleClick) 
         }
         
