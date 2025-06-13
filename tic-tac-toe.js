@@ -3,7 +3,10 @@ function createPlayer(name, symbol){
     return {name, symbol}
 }
 const DisplayController = (function(){
-        function attachEventListener(){
+    document.querySelector('.start-btn').addEventListener('click', () => GameController.startGame(GameBoard.board));
+        function startGameDisplay(){
+            // Hide form
+            // display board
             document.querySelector('.game-container').addEventListener('click', handleClick) 
         }
         
@@ -28,7 +31,7 @@ const DisplayController = (function(){
         }
 
             
-        return {attachEventListener}
+        return {startGameDisplay}
     })();
 
 
@@ -146,10 +149,9 @@ const GameController = (function createGameboard(){
         state.player1 = createPlayer("Player1", "X");
         state.player2 = createPlayer("Player2", "O");
         state.currentPlayer = state.player1;
-        DisplayController.attachEventListener();
+        DisplayController.startGameDisplay();
     }
 
     return {startGame, playerMove, state}
 })();
 
-GameController.startGame(GameBoard.board);
