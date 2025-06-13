@@ -3,9 +3,14 @@ function createPlayer(name, symbol){
     return {name, symbol}
 }
 const DisplayController = (function(){
-    document.querySelector('.start-btn').addEventListener('click', () => GameController.startGame(GameBoard.board));
-        function startGameDisplay(){
-            document.querySelector('.players').classList.add("hide");
+    const playerNameForm = document.querySelector('.players');
+    playerNameForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        // TODO: Get the form data
+        playerNameForm.classList.add("hide");
+        GameController.startGame(GameBoard.board);
+    });
+    function startGameDisplay(){
             document.querySelector('.border').classList.remove("hide");
             document.querySelector('.game-container').addEventListener('click', handleClick) 
         }
