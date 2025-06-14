@@ -5,9 +5,11 @@
 }
 
 body{
-    display: flex;
-    flex-direction: column;
+    display: grid;
     align-items: center;
+    justify-items: center;
+    grid-template-columns: 1fr;
+    grid-template-rows:7.5vw 1fr;
     font-family: 'Montserrat';
     background: var(--color2);
     height: 90vh;
