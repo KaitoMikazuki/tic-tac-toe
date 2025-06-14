@@ -9,7 +9,7 @@ body{
     align-items: center;
     justify-items: center;
     grid-template-columns: 1fr;
-    grid-template-rows:7.5vw 1fr;
+    grid-template-rows:10vh 1fr;
     font-family: 'Montserrat';
     background: var(--color2);
     height: 90vh;
@@ -32,7 +32,7 @@ html{
 nav{
     background: var(--color1);
     width: 100%;
-    height: 7.5vw;
+    height: 10vh;
     font-size: 2rem;
     display: flex;
     justify-content: center;
@@ -69,12 +69,12 @@ nav h1{
     margin: 32px;
     border: 2px solid black;
     padding: 16px;
+    width: 35vw;
 }
 
 .game-container{
     background: black; /* GRID GAP COLOR*/
     aspect-ratio: 1/1;
-    width: 40vw;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
@@ -87,6 +87,6 @@ nav h1{
     align-items: center;
     justify-content: center;
     background-color: white;
-    font-size: 10vw;
+    font-size: 7vw;
     cursor: pointer;
 }
