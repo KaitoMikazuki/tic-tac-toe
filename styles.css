@@ -12,7 +12,7 @@ body{
     grid-template-rows:10vh 1fr;
     font-family: 'Montserrat';
     background: var(--color2);
-    height: 90vh;
+    height: 100vh;
 }
 
 
@@ -48,12 +48,10 @@ nav h1{
 /* Player name input form */
 .players{
     padding: 16px;
-    margin: 16px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    align-items: center;
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
     gap:20vh;
-    height: 100%;
     width: 40%;
 }
 
@@ -67,7 +65,7 @@ nav h1{
 .player input{
     appearance: none;
     border: var(--color3) 1px solid;
-    padding: 8px;
+    padding: 12px;
     outline: none;
     border-radius: 8px;
     
@@ -76,7 +74,6 @@ nav h1{
 .player input:focus{
     outline: var(--color3) 2px solid;
     appearance: none;
-    padding: 8px;
 }
 
 .players .start-btn{
