@@ -64,6 +64,21 @@ nav h1{
     gap: 8px;
 }
 
+.player input{
+    appearance: none;
+    border: var(--color3) 1px solid;
+    padding: 8px;
+    outline: none;
+    border-radius: 8px;
+    
+}
+
+.player input:focus{
+    outline: var(--color3) 2px solid;
+    appearance: none;
+    padding: 8px;
+}
+
 
 .border{
     margin: 32px;
@@ -90,3 +105,4 @@ nav h1{
     font-size: 7vw;
     cursor: pointer;
 }
+
