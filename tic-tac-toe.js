@@ -18,7 +18,12 @@ const DisplayController = (function(){
         playerNameForm.classList.add("hide");
         GameController.startGame(playerOneName, playerTwoName);
     });
-    
+
+    document.getElementById('restart').addEventListener('click', () => location.reload());
+
+
+
+
 
     function startGameDisplay(){
             document.querySelector('main').classList.remove("hide");

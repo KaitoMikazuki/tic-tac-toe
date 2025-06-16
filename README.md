@@ -1,0 +1,1 @@
+Game will continue to play even after a winner. felt like it was a bit far from the main point of the lesson which is factory functions and IIFEs

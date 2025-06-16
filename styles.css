@@ -140,3 +140,10 @@ main > :nth-child(3){
     cursor: pointer;
 }
 
+#restart{
+    cursor: pointer;
+}
+
+#restart:hover{
+    color: var(--color3);
+}
