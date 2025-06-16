@@ -1,8 +1,12 @@
-// Create player
 function createPlayer(name, symbol){
     return {name, symbol}
 }
+
+
 const DisplayController = (function(){
+    let clickTarget;
+
+    // Adds submit listener then acquires form data to pass as parameters
     const playerNameForm = document.querySelector('.players');
     playerNameForm.addEventListener('submit', (event) => {
         event.preventDefault();
@@ -15,34 +19,37 @@ const DisplayController = (function(){
         GameController.startGame(playerOneName, playerTwoName);
     });
     
+
     function startGameDisplay(){
             document.querySelector('.border').classList.remove("hide");
             document.querySelector('.game-container').addEventListener('click', handleClick) 
         }
         
-        function handleClick(event){
-            let target = event.target;
-            console.log(target)
-            if (!target.classList.contains('cell')){
-                return
-            }
-            
-            const moveCode = target.id;
-            let moveSuccess = GameController.playerMove(moveCode);
-            if (moveSuccess){
-                updateBoardDisplay(target, GameController.state.currentPlayer.symbol);
-            }
 
+    function handleClick(event){
+        clickTarget = event.target;
+        console.log(clickTarget)
+        if (!clickTarget.classList.contains('cell')){
+            return
         }
+        
+        const moveCode = clickTarget.id;
+        GameController.playerMove(moveCode);
+
+    }
+
+    function updateBoardDisplay(symbol){
+        clickTarget.textContent = symbol;
+    }
+
+    // function declareWinner(){
+    //     console.log
+    // }
+
+    return {startGameDisplay, updateBoardDisplay}
+})();
 
 
-        function updateBoardDisplay(target, symbol){
-            target.textContent = symbol;
-        }
-
-            
-        return {startGameDisplay}
-    })();
 
 
 
@@ -110,6 +117,9 @@ const GameBoard = (function createBoard(){
 })();
 
 
+
+
+
 const GameController = (function createGameboard(){
     const state = {
         gameBoard: GameBoard,
@@ -150,6 +160,8 @@ const GameController = (function createGameboard(){
         else if (state.remainingTurns === 0){
             console.log("It's a tie")
         }
+
+        DisplayController.updateBoardDisplay(state.currentPlayer.symbol);
         turnSwitcher();
         return true
     }
