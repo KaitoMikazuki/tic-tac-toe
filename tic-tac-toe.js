@@ -21,7 +21,7 @@ const DisplayController = (function(){
     
 
     function startGameDisplay(){
-            document.querySelector('.border').classList.remove("hide");
+            document.querySelector('main').classList.remove("hide");
             document.querySelector('.game-container').addEventListener('click', handleClick) 
         }
         

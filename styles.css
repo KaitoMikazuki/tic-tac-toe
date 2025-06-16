@@ -96,14 +96,14 @@ nav h1{
 }
 
 /* GAME section */
-.border{
+/* .border{
     margin: 32px;
     border: 2px solid black;
     padding: 16px;
-    width: 35vw;
-}
+} */
 
 .game-container{
+    width: 35vw;
     background: black; /* GRID GAP COLOR*/
     aspect-ratio: 1/1;
     display: grid;
