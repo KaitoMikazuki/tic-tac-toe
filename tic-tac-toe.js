@@ -43,12 +43,14 @@ const DisplayController = (function(){
     }
 
     function declareWinner(winner){
+        winnerDeclaration = document.getElementById("winner")
         if (winner === null){
-            // it's a tie
+            winnerDeclaration.textContent = "It's a tie!"
         }
         else{
-            // winner wins
+            winnerDeclaration.textContent = `${winner} wins!`
         }
+        document.getElementById("restart").textContent = "Play again?"
     }
 
     return {startGameDisplay, updateBoardDisplay, declareWinner}
