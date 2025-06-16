@@ -79,7 +79,26 @@ nav h1{
     padding: 8px;
 }
 
+.players .start-btn{
+    appearance: none;
+    background-color: var(--color3);
+    color:white;
+    border: none;
+    padding: 12px 0;
+    border-radius: 32px;
+    font-size: 1.5rem;
+    transition: filter 0.2s ease;
+}
 
+.players .start-btn:hover{
+    filter: brightness(0.9);
+}
+ 
+.players .start-btn:active{
+    background-color: var(--color1);
+}
+
+/* GAME section */
 .border{
     margin: 32px;
     border: 2px solid black;
