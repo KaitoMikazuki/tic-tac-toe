@@ -42,11 +42,16 @@ const DisplayController = (function(){
         clickTarget.textContent = symbol;
     }
 
-    // function declareWinner(){
-    //     console.log
-    // }
+    function declareWinner(winner){
+        if (winner === null){
+            // it's a tie
+        }
+        else{
+            // winner wins
+        }
+    }
 
-    return {startGameDisplay, updateBoardDisplay}
+    return {startGameDisplay, updateBoardDisplay, declareWinner}
 })();
 
 
@@ -155,10 +160,10 @@ const GameController = (function createGameboard(){
         // Chwcks for winners
         state.winner = state.gameBoard.checkWins()
         if (state.winner === true){
-            console.log(`${state.currentPlayer.name} wins!`);
+            DisplayController.declareWinner(state.currentPlayer.name);
         }
         else if (state.remainingTurns === 0){
-            console.log("It's a tie")
+            DisplayController.declareWinner(null);
         }
 
         DisplayController.updateBoardDisplay(state.currentPlayer.symbol);
